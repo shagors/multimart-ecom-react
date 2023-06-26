@@ -47,16 +47,46 @@
 }
 
 .nav__icons span i {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--primary-color);
+  cursor: pointer;
+}
+
+.cart__icon,
+.fav__icon {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 20%;
+  right: -18%;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: "";
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  z-index: 10;
 }
 
 .nav__icons span img {
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .mobile__menu {
   font-size: 1.3rem;
   color: var(--primary-color);
+  display: none;
+}
+
+.nav__active {
+  font-weight: 700 !important;
 }
