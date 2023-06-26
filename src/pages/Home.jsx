@@ -5,11 +5,13 @@ import heroImg from "../assets/images/hero-img.png";
 import "../styles/home.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Services from "../services/Services";
 
 const Home = () => {
   const year = new Date().getFullYear();
   return (
     <Helmet title={"Home"}>
+      {/* Hero Section */}
       <section className="hero__section">
         <Container>
           <Row>
@@ -36,6 +38,9 @@ const Home = () => {
           </Row>
         </Container>
       </section>
+
+      {/* Services */}
+      <Services />
     </Helmet>
   );
 };
