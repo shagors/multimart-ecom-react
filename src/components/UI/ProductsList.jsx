@@ -5,7 +5,7 @@ const ProductsList = ({ data }) => {
   //   console.log(data);
   return (
     <>
-      {data.map((item) => (
+      {data?.map((item) => (
         <ProductCard item={item} />
       ))}
     </>
