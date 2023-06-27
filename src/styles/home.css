@@ -79,6 +79,10 @@
     font-size: 1rem !important;
   }
 
+  .counter__img {
+    display: none;
+  }
+
   .count__down-col {
     text-align: center !important;
   }
