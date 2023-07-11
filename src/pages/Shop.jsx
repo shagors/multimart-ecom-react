@@ -10,6 +10,7 @@ import ProductsList from "../components/UI/ProductsList";
 const Shop = () => {
   const [productsData, setProductsData] = useState(products);
 
+  // product filter for category search when click search category
   const handleFilter = (e) => {
     const filterValue = e.target.value;
 
@@ -48,6 +49,17 @@ const Shop = () => {
       setProductsData(filteredProducts);
     }
   };
+
+  // search query add for searching every products by letter
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value;
+
+    const searchedProducts = products.filter((item) =>
+      item.productName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setProductsData(searchedProducts);
+  };
   return (
     <Helmet title={Shop}>
       <CommonSection title="Products" />
@@ -78,7 +90,11 @@ const Shop = () => {
             </Col>
             <Col lg="6" md="6">
               <div className="search__box">
-                <input type="text" placeholder="Search........" />
+                <input
+                  type="text"
+                  placeholder="Search........"
+                  onChange={handleSearch}
+                />
                 <span>
                   <i className="ri-search-line"></i>
                 </span>
@@ -92,7 +108,7 @@ const Shop = () => {
         <Container>
           <Row>
             {productsData.length === 0 ? (
-              <h1>No products are found</h1>
+              <h1 className="text-center fs-4">No products are found!</h1>
             ) : (
               <ProductsList data={productsData} />
             )}
