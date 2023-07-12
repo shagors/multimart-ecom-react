@@ -82,3 +82,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.related__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 30px;
+}
