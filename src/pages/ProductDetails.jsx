@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import products from "../assets/data/products";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
@@ -8,6 +8,8 @@ import "../styles/product-details.css";
 import { motion } from "framer-motion";
 
 const ProductDetails = () => {
+  const [tab, setTab] = useState("desc");
+  const [rating, setRating] = useState(null);
   const { id } = useParams();
   const product = products.find((item) => item.id === id);
 
@@ -16,10 +18,14 @@ const ProductDetails = () => {
     productName,
     price,
     avgRating,
-    review,
+    reviews,
     description,
     shortDesc,
+    category,
   } = product;
+
+  const relatedProducts = () =>
+    products.filter((item) => item.category === category);
 
   return (
     <Helmet title={productName}>
@@ -63,6 +69,86 @@ const ProductDetails = () => {
                   Add to Cart
                 </motion.button>
               </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12">
+              <div className="tab__wrapper d-flex align-items-center gap-5">
+                <h6
+                  className={`${tab === "desc" ? "active__tab" : ""}`}
+                  onClick={() => setTab("desc")}>
+                  Description
+                </h6>
+                <h6
+                  className={`${tab === "rev" ? "active__tab" : ""}`}
+                  onClick={() => setTab("rev")}>
+                  Reviews ({reviews?.length})
+                </h6>
+              </div>
+
+              {tab === "desc" ? (
+                <div className="tab__content mt-5">
+                  <p>{description}</p>
+                </div>
+              ) : (
+                <div className="product__review mt-5">
+                  <div className="review__wrapper">
+                    <ul>
+                      {reviews?.map((item, index) => (
+                        <li key={index} className="mb-4">
+                          <h6>Jhon Doe</h6>
+                          <span>{item.rating} (rating)</span>
+                          <p>{item.text}</p>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="review__form">
+                      <h4 className="">Leave your experience</h4>
+                      <form action="">
+                        <div className="form__group">
+                          <input type="text" placeholder="Enter Name" />
+                        </div>
+
+                        <div className="form__group d-flex align-items-center gap-5">
+                          <span onClick={() => setRating(1)}>
+                            1 <i className="ri-star-s-fill"></i>
+                          </span>
+                          <span onClick={() => setRating(2)}>
+                            2 <i className="ri-star-s-fill"></i>
+                          </span>
+                          <span onClick={() => setRating(3)}>
+                            3 <i className="ri-star-s-fill"></i>
+                          </span>
+                          <span onClick={() => setRating(4)}>
+                            4 <i className="ri-star-s-fill"></i>
+                          </span>
+                          <span onClick={() => setRating(5)}>
+                            5 <i className="ri-star-s-fill"></i>
+                          </span>
+                        </div>
+
+                        <div className="form__group">
+                          <textarea
+                            rows={4}
+                            type="text"
+                            placeholder="Review Message...."
+                          />
+                        </div>
+
+                        <button type="submit" className="buy__btn">
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              )}
             </Col>
           </Row>
         </Container>
