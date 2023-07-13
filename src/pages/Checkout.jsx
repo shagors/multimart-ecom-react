@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 const Checkout = () => {
-  const totalQty = useSelector((state) => state.cart.totalQty);
+  const totalQty = useSelector((state) => state.cart.totalQuantity);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
 
   return (
@@ -45,7 +45,7 @@ const Checkout = () => {
             <Col lg="4">
               <div className="checkout__cart">
                 <h6 className="">
-                  Total Qty: <span>{totalQty}</span>
+                  Total Qty: <span>{totalQty} items</span>
                 </h6>
                 <h6 className="">
                   Subtotal: <span>${totalAmount}</span>

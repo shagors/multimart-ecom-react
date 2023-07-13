@@ -12,7 +12,7 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
 
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <Helmet title="Cart">
       <CommonSection title="Shooping Cart" />
@@ -54,13 +54,17 @@ const Cart = () => {
                 taxes amd shipping cost will be calculate in checkout
               </p>
               <div className="mt-3 d-flex flex-column">
-                <buton className="buy__btn w-100 text-center">
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  className="buy__btn w-100 text-center">
                   <Link to="/checkout">Checkout</Link>
-                </buton>
+                </motion.button>
 
-                <buton className="buy__btn w-100 mt-3 text-center">
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  className="buy__btn w-100 mt-3 text-center">
                   <Link to="/shop">Continue Shopping</Link>
-                </buton>
+                </motion.button>
               </div>
             </Col>
           </Row>
