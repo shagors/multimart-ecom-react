@@ -72,55 +72,61 @@ const Signup = () => {
       <section>
         <Container>
           <Row>
-            <Col lg="6" className="m-auto text-center">
-              <h3 className="fw-bold mb-4">Signup</h3>
-              <Form className="auth__form" onSubmit={signup}>
-                <FormGroup className="form__group">
-                  <input
-                    type="text"
-                    name=""
-                    placeholder="Enter your Name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                  />
-                </FormGroup>
-                <FormGroup className="form__group">
-                  <input
-                    type="email"
-                    name=""
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </FormGroup>
-                <FormGroup className="form__group">
-                  <input
-                    type="passwprd"
-                    name=""
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </FormGroup>
-                <FormGroup className="form__group">
-                  <input
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
-                  />
-                </FormGroup>
+            {loading ? (
+              <Col lg="12" className="text-center">
+                <h6 className="fw-bold">Loading.....</h6>
+              </Col>
+            ) : (
+              <Col lg="6" className="m-auto text-center">
+                <h3 className="fw-bold mb-4">Signup</h3>
+                <Form className="auth__form" onSubmit={signup}>
+                  <FormGroup className="form__group">
+                    <input
+                      type="text"
+                      name=""
+                      placeholder="Enter your Name"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup className="form__group">
+                    <input
+                      type="email"
+                      name=""
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup className="form__group">
+                    <input
+                      type="password"
+                      name=""
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup className="form__group">
+                    <input
+                      type="file"
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                  </FormGroup>
 
-                <motion.button
-                  type="submit"
-                  whileTap={{ scale: 0.9 }}
-                  className="buy__btn auth__btn">
-                  Create an Account
-                </motion.button>
-                <p>
-                  Already have an account?
-                  <Link to="/login"> Login</Link>
-                </p>
-              </Form>
-            </Col>
+                  <motion.button
+                    type="submit"
+                    whileTap={{ scale: 0.9 }}
+                    className="buy__btn auth__btn">
+                    Create an Account
+                  </motion.button>
+                  <p>
+                    Already have an account?
+                    <Link to="/login"> Login</Link>
+                  </p>
+                </Form>
+              </Col>
+            )}
           </Row>
         </Container>
       </section>
