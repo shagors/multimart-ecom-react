@@ -60,7 +60,7 @@ const Login = () => {
                   </FormGroup>
                   <FormGroup className="form__group">
                     <input
-                      type="passwprd"
+                      type="password"
                       name=""
                       placeholder="Enter your password"
                       value={password}

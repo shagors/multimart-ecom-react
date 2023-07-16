@@ -7,6 +7,9 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import useAuth from "../../hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
 
 const nav__links = [
   {
@@ -30,6 +33,7 @@ const Header = () => {
   const { currentUser } = useAuth();
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const profileActionRef = useRef(null);
 
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
@@ -44,6 +48,17 @@ const Header = () => {
     });
   };
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logout Successfuly");
+        navigate("/home");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   useEffect(() => {
     stickyHeaderFunc();
     return () => window.removeEventListener("sticky", stickyHeaderFunc);
@@ -54,6 +69,9 @@ const Header = () => {
   const navigateToCart = () => {
     navigate("/cart");
   };
+
+  const toggleProfileActions = () =>
+    profileActionRef.current.classList.toggle("show__profileActions");
 
   return (
     <header className="header" ref={headerRef}>
@@ -98,14 +116,18 @@ const Header = () => {
                   whileTap={{ scale: 1.2 }}
                   src={currentUser ? currentUser.photoURL : userIcon}
                   alt="ProfileImage"
+                  onClick={toggleProfileActions}
                 />
-                <div className="profile__actions">
+                <div
+                  className="profile__actions"
+                  ref={profileActionRef}
+                  onClick={toggleProfileActions}>
                   {currentUser ? (
-                    <span>Logout</span>
+                    <span onClick={logout}>Logout</span>
                   ) : (
-                    <div>
-                      <Link to="/signup">Signup</Link>
-                      <Link to="/login">Login</Link>
+                    <div className="d-flex align-items-center justify-center flex-column">
+                      <Link to="/signup">SignUp</Link> <br />
+                      <Link to="/login">LogIn</Link>
                     </div>
                   )}
                 </div>
