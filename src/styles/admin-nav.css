@@ -68,3 +68,7 @@
   padding: 10px 15px;
   border-radius: 5px;
 }
+
+.active__admin-menu {
+  background: whitesmoke;
+}
