@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Col, Container, Form, FormGroup, Row } from "reactstrap";
+import { db, storage } from "../firebase.config";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 
 const AddProducts = () => {
   const [enterTitle, setEnterTitle] = useState("");
@@ -8,20 +12,50 @@ const AddProducts = () => {
   const [enterPrice, setEnterPrice] = useState("");
   const [enterCategory, setEnterCategory] = useState("");
   const [enterProductImg, setEnterProductImg] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const addProduct = async (e) => {
     e.preventDefault();
 
-    const product = {
-      title: enterTitle,
-      shortDesc: enterShortDesc,
-      description: enterDescription,
-      price: enterPrice,
-      category: enterCategory,
-      imgUrl: enterProductImg,
-    };
+    // const product = {
+    //   title: enterTitle,
+    //   shortDesc: enterShortDesc,
+    //   description: enterDescription,
+    //   price: enterPrice,
+    //   category: enterCategory,
+    //   imgUrl: enterProductImg,
+    // };
 
-    console.log(product);
+    //   Product add to firebase databse
+    try {
+      const docRef = await collection(db, "products");
+      const storageRef = ref(
+        storage,
+        `productImages/${Date.now() + enterProductImg.name}`
+      );
+      const uploadTask = uploadBytesResumable(storageRef, enterProductImg);
+
+      uploadTask.on(
+        () => {
+          toast.error("image not uploaded!!");
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await addDoc(docRef, {
+              title: enterTitle,
+              shortDesc: enterShortDesc,
+              description: enterDescription,
+              price: enterPrice,
+              category: enterCategory,
+              imgUrl: downloadURL,
+            });
+          });
+          toast.success("Product Successfully added");
+        }
+      );
+    } catch (error) {}
+
+    // console.log(product);
   };
 
   return (
