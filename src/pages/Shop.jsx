@@ -61,7 +61,7 @@ const Shop = () => {
     setProductsData(searchedProducts);
   };
   return (
-    <Helmet title={Shop}>
+    <Helmet title="Shop">
       <CommonSection title="Products" />
 
       <section>
