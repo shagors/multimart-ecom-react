@@ -49,7 +49,7 @@ const AdminNav = () => {
                 <span>
                   <i className="ri-settings-2-line"></i>
                 </span>
-                <img src={currentUser.photoURL} alt="User" />
+                <img src={currentUser && currentUser.photoURL} alt="User" />
               </div>
             </div>
           </Container>

@@ -10,8 +10,11 @@ import ProductsList from "../components/UI/ProductsList";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
+import { db } from "../firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 
 const ProductDetails = () => {
+  // const [product, setProduct] = useState({});
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(null);
   const { id } = useParams();
@@ -20,6 +23,21 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   const product = products?.find((item) => item.id === id);
+
+  const docRef = doc(db, "products", id);
+
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     const docSnap = await getDoc(docRef);
+  //     if (docSnap.exists()) {
+  //       setProduct(docSnap.data());
+  //     } else {
+  //       console.log("no product!");
+  //     }
+  //   };
+
+  //   getProduct();
+  // }, []);
 
   const {
     imgUrl,

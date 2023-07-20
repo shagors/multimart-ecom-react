@@ -13,7 +13,7 @@ const AllProducts = () => {
     toast.success("Deleted product!");
   };
 
-  // console.log(productsData);
+  console.log(productsData);
   return (
     <section>
       <Container>
